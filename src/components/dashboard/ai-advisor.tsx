@@ -67,7 +67,7 @@ export function AIAdvisor() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      costPerGb: "",
+      costPerGb: 0,
       desiredProfitMarginPercentage: 20,
       currencySymbol: "MT",
     },
@@ -87,7 +87,11 @@ export function AIAdvisor() {
     }
     if (state.data) {
         setResult(state.data);
-        form.reset();
+        form.reset({
+          costPerGb: 0,
+          desiredProfitMarginPercentage: 20,
+          currencySymbol: "MT",
+        });
     }
   }, [state, toast, form]);
 
@@ -124,7 +128,7 @@ export function AIAdvisor() {
                 <CardContent>
                   <p className="text-3xl font-bold">
                     {result.suggestedSellingPricePerGb.toFixed(2)}{" "}
-                    <span className="text-sm font-normal text-muted-foreground">{result.explanation.match(/([A-Z]{2,3}|[$€£])/)?.[0] || 'MT'}/GB</span>
+                    <span className="text-sm font-normal text-muted-foreground">{result.currencySymbol}/GB</span>
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">{result.explanation}</p>
                 </CardContent>
