@@ -19,6 +19,7 @@ import {
 import { Logo } from "@/components/logo";
 import { UserNav } from "@/components/user-nav";
 import { Separator } from "@/components/ui/separator";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function DashboardLayout({
   children,
@@ -61,8 +62,9 @@ export default function DashboardLayout({
             <div className="flex-1">
               <h1 className="text-lg font-semibold sm:text-xl">Dashboard</h1>
             </div>
+            <ThemeToggle />
           </header>
-          <div className="flex-1 overflow-auto p-4 sm:p-6">{children}</div>
+          <main className="flex-1 overflow-auto p-4 sm:p-6">{children}</main>
           <footer className="border-t bg-card p-4 text-center text-sm text-muted-foreground">
             © {new Date().getFullYear()} HelioTech Devs &lt;/&gt;
           </footer>
