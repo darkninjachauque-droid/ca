@@ -62,60 +62,62 @@ export function CalculationHistory({ history, onDelete, onClearAll }: Calculatio
                 <TableHead className="text-right w-[50px]">Ações</TableHead>
               </TableRow>
             </TableHeader>
-            <AnimatePresence>
-              {history.length > 0 ? (
-                history.map((calc) => (
-                  <motion.tr
-                    key={calc.id}
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
-                    className="hover:bg-muted/50"
-                  >
-                    <TableCell>
-                      {format(calc.createdAt, "dd/MM/yy HH:mm")}
+            <TableBody>
+              <AnimatePresence>
+                {history.length > 0 ? (
+                  history.map((calc) => (
+                    <motion.tr
+                      key={calc.id}
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0, x: -20, transition: { duration: 0.2 } }}
+                      className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
+                    >
+                      <TableCell>
+                        {format(calc.createdAt, "dd/MM/yy HH:mm")}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {calc.totalCost.toFixed(2)} MT
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {calc.totalGb}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {calc.pricePerGb.toFixed(2)} MT
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {calc.revenue.toFixed(2)} MT
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Badge
+                          variant={calc.profit >= 0 ? "default" : "destructive"}
+                          className={calc.profit >= 0 ? "bg-green-600/20 text-green-700 dark:bg-green-500/20 dark:text-green-400 border-transparent" : "bg-red-600/20 text-red-700 dark:bg-red-500/20 dark:text-red-400 border-transparent"}
+                        >
+                           {calc.profit >= 0 ? <TrendingUp className="mr-1 h-3 w-3" /> : <TrendingDown className="mr-1 h-3 w-3" />}
+                          {calc.profit.toFixed(2)} MT
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onDelete(calc.id)}>
+                          <X className="h-4 w-4" />
+                          <span className="sr-only">Apagar</span>
+                        </Button>
+                      </TableCell>
+                    </motion.tr>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={7}
+                      className="h-24 text-center text-muted-foreground"
+                    >
+                      Nenhum cálculo ainda.
                     </TableCell>
-                    <TableCell className="text-right">
-                      {calc.totalCost.toFixed(2)} MT
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {calc.totalGb}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {calc.pricePerGb.toFixed(2)} MT
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {calc.revenue.toFixed(2)} MT
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Badge
-                        variant={calc.profit >= 0 ? "default" : "destructive"}
-                        className={calc.profit >= 0 ? "bg-green-600/20 text-green-700 dark:bg-green-500/20 dark:text-green-400 border-transparent" : "bg-red-600/20 text-red-700 dark:bg-red-500/20 dark:text-red-400 border-transparent"}
-                      >
-                         {calc.profit >= 0 ? <TrendingUp className="mr-1 h-3 w-3" /> : <TrendingDown className="mr-1 h-3 w-3" />}
-                        {calc.profit.toFixed(2)} MT
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => onDelete(calc.id)}>
-                        <X className="h-4 w-4" />
-                        <span className="sr-only">Apagar</span>
-                      </Button>
-                    </TableCell>
-                  </motion.tr>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={7}
-                    className="h-24 text-center text-muted-foreground"
-                  >
-                    Nenhum cálculo ainda.
-                  </TableCell>
-                </TableRow>
-              )}
-              </AnimatePresence>
+                  </TableRow>
+                )}
+                </AnimatePresence>
+            </TableBody>
           </Table>
         </div>
       </CardContent>
