@@ -1,6 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -27,11 +26,6 @@ export function UserNav() {
     router.push("/login");
   };
 
-  const getInitials = (email?: string | null) => {
-    if (!email) return "U";
-    return email[0].toUpperCase();
-  };
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,10 +33,9 @@ export function UserNav() {
           variant="ghost"
           className="relative h-10 w-full justify-start gap-2 px-2"
         >
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={user?.photoURL ?? `https://avatar.vercel.sh/${user?.email}.png`} alt={user?.email ?? ""} />
-            <AvatarFallback>{getInitials(user?.email)}</AvatarFallback>
-          </Avatar>
+          <div className="flex h-8 w-8 items-center justify-center">
+            <User className="h-5 w-5" />
+          </div>
           <div className="truncate text-left group-data-[collapsible=icon]:hidden">
             <p className="truncate text-sm font-medium">{user?.email ?? "Minha Conta"}</p>
           </div>
