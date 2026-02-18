@@ -60,18 +60,27 @@ export default function SignupPage() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!auth || !firestore) return;
+    if (!auth || !firestore) {
+        toast({
+            variant: "destructive",
+            title: "Falha ao criar conta",
+            description: "A autenticação não está configurada corretamente.",
+        });
+        return;
+    }
     setIsLoading(true);
     try {
       await signUp(auth, firestore, values);
       router.push("/dashboard");
     } catch (e) {
       const err = e as AuthError;
-      let description = "Ocorreu um erro inesperado. Tente novamente.";
+      let description = `Ocorreu um erro inesperado: ${err.message}.`;
       if (err.code === "auth/email-already-in-use") {
         description = "Este e-mail já está em uso por outra conta.";
       } else if (err.code === "auth/weak-password") {
         description = "A senha é muito fraca. Tente uma mais forte.";
+      } else if (err.code === 'auth/invalid-email') {
+        description = "O formato do e-mail é inválido.";
       }
       toast({
         variant: "destructive",

@@ -50,20 +50,29 @@ export default function LoginPage() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!auth) return;
+    if (!auth) {
+        toast({
+            variant: "destructive",
+            title: "Falha no login",
+            description: "A autenticação não está configurada corretamente.",
+        });
+        return;
+    };
     setIsLoading(true);
     try {
       await signIn(auth, values);
       router.push("/dashboard");
     } catch (e) {
       const err = e as AuthError;
-      let description = "Ocorreu um erro inesperado. Tente novamente.";
+      let description = `Ocorreu um erro inesperado: ${err.message}.`;
       if (
         err.code === "auth/user-not-found" ||
         err.code === "auth/wrong-password" ||
         err.code === "auth/invalid-credential"
       ) {
         description = "E-mail ou senha inválidos.";
+      } else if (err.code === "auth/invalid-email") {
+        description = "O formato do e-mail é inválido.";
       }
       toast({
         variant: "destructive",
@@ -120,7 +129,7 @@ export default function LoginPage() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isLoading}>
+            <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Entrar
             </Button>
