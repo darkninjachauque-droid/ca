@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { LayoutDashboard } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { LayoutDashboard, Loader2 } from "lucide-react";
+import { useUser } from "@/firebase";
+import React, { useEffect } from "react";
 
 import {
   SidebarProvider,
@@ -26,6 +28,22 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const { user, initialized } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (initialized && !user) {
+      router.replace("/login");
+    }
+  }, [initialized, user, router]);
+
+  if (!initialized || !user) {
+    return (
+        <div className="flex min-h-screen w-full items-center justify-center bg-background">
+            <Loader2 className="h-10 w-10 animate-spin text-primary" />
+        </div>
+    );
+  }
 
   return (
     <SidebarProvider>

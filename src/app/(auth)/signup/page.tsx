@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useAuth } from "@/firebase";
+import { signUp } from "@/firebase/auth/actions";
+import { useToast } from "@/hooks/use-toast";
+import { AuthError } from "firebase/auth";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +44,10 @@ const formSchema = z
 
 export default function SignupPage() {
   const router = useRouter();
+  const auth = useAuth();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,10 +58,28 @@ export default function SignupPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Mock signup successful
-    console.log(values);
-    router.push("/dashboard");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!auth) return;
+    setIsLoading(true);
+    try {
+      await signUp(auth, values);
+      router.push("/dashboard");
+    } catch (e) {
+      const err = e as AuthError;
+      let description = "Ocorreu um erro inesperado. Tente novamente.";
+      if (err.code === "auth/email-already-in-use") {
+        description = "Este e-mail já está em uso por outra conta.";
+      } else if (err.code === "auth/weak-password") {
+        description = "A senha é muito fraca. Tente uma mais forte.";
+      }
+      toast({
+        variant: "destructive",
+        title: "Falha ao criar conta",
+        description,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -117,7 +145,8 @@ export default function SignupPage() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Criar Conta
             </Button>
           </form>

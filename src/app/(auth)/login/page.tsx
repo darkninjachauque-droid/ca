@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useAuth } from "@/firebase";
+import { signIn } from "@/firebase/auth/actions";
+import { useToast } from "@/hooks/use-toast";
+import { AuthError } from "firebase/auth";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +37,10 @@ const formSchema = z.object({
 
 export default function LoginPage() {
   const router = useRouter();
+  const auth = useAuth();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,10 +49,30 @@ export default function LoginPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Mock login successful
-    console.log(values);
-    router.push("/dashboard");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!auth) return;
+    setIsLoading(true);
+    try {
+      await signIn(auth, values);
+      router.push("/dashboard");
+    } catch (e) {
+      const err = e as AuthError;
+      let description = "Ocorreu um erro inesperado. Tente novamente.";
+      if (
+        err.code === "auth/user-not-found" ||
+        err.code === "auth/wrong-password" ||
+        err.code === "auth/invalid-credential"
+      ) {
+        description = "E-mail ou senha inválidos.";
+      }
+      toast({
+        variant: "destructive",
+        title: "Falha no login",
+        description,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -90,7 +120,8 @@ export default function LoginPage() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Entrar
             </Button>
           </form>
