@@ -13,6 +13,10 @@
           "type": "string",
           "format": "uri",
           "description": "URL of the user's profile picture."
+        },
+        "phone": {
+          "type": "string",
+          "description": "The user's phone number."
         }
       }
     }
