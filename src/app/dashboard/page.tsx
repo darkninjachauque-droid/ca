@@ -13,6 +13,14 @@ export default function DashboardPage() {
     setHistory((prev) => [calculation, ...prev]);
   };
 
+  const handleDeleteCalculation = (id: string) => {
+    setHistory((prev) => prev.filter((calc) => calc.id !== id));
+  };
+
+  const handleClearHistory = () => {
+    setHistory([]);
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -23,7 +31,11 @@ export default function DashboardPage() {
             <AIAdvisor />
         </div>
       </div>
-      <CalculationHistory history={history} />
+      <CalculationHistory 
+        history={history}
+        onDelete={handleDeleteCalculation}
+        onClearAll={handleClearHistory}
+      />
     </div>
   );
 }
