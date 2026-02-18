@@ -1,0 +1,12 @@
+patch-package
+--- a/node_modules/react-hook-form/package.json
++++ b/node_modules/react-hook-form/package.json
+@@ -58,7 +58,7 @@
+ "types": "./dist/index.d.ts",
+ "peerDependencies": {
+   "@hookform/core": "^7.43.9",
+-  "react": "^16.8.0 || ^17 || ^18"
++  "react": "^16.8.0 || ^17 || ^18 || ^19"
+ },
+ "peerDependenciesMeta": {
+   "@hookform/core": {

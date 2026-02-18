@@ -1,0 +1,12 @@
+patch-package
+--- a/node_modules/@hookform/resolvers/package.json
++++ b/node_modules/@hookform/resolvers/package.json
+@@ -43,7 +43,7 @@
+   "peerDependencies": {
+     "@hookform/core": "^7.43.9",
+     "react-hook-form": "^7.43.9",
+-    "react": "^16.8.0 || ^17 || ^18"
++    "react": "^16.8.0 || ^17 || ^18 || ^19"
+   },
+   "peerDependenciesMeta": {
+     "@hookform/core": {
