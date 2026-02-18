@@ -27,25 +27,22 @@ export function UserNav() {
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
           <div className="truncate text-left group-data-[collapsible=icon]:hidden">
-            <p className="truncate text-sm font-medium">Usuário</p>
-            <p className="truncate text-xs text-muted-foreground">
-              usuario@exemplo.com
-            </p>
+            <p className="truncate text-sm font-medium">Minha Conta</p>
           </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">Usuário</p>
+            <p className="text-sm font-medium leading-none">Minha Conta</p>
             <p className="text-xs leading-none text-muted-foreground">
-              usuario@exemplo.com
+              (Ainda em desenvolvimento)
             </p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem disabled>
             <User className="mr-2 h-4 w-4" />
             <span>Perfil</span>
           </DropdownMenuItem>
