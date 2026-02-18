@@ -1,22 +1,13 @@
 diff --git a/node_modules/@radix-ui/react-collapsible/package.json b/node_modules/@radix-ui/react-collapsible/package.json
-index b28d3ff..a9c82c6 100644
+index 6586847..7f1396a 100644
 --- a/node_modules/@radix-ui/react-collapsible/package.json
 +++ b/node_modules/@radix-ui/react-collapsible/package.json
-@@ -47,7 +47,7 @@
-   "peerDependencies": {
-     "@radix-ui/react-context": "1.1.2",
-     "react": "^18.0.0",
--    "react-dom": "^18.0.0"
-+    "react-dom": "^18.0.0 || ^19.0.0"
+@@ -52,7 +52,7 @@
    },
-   "dependencies": {
-     "@babel/runtime": "^7.13.10",
-@@ -61,4 +61,7 @@
-   "bugs": {
-     "url": "https://github.com/radix-ui/primitives/issues"
+   "peerDependencies": {
+-    "react": "^18.0.0",
+-    "react-dom": "^18.0.0"
++    "react": "^18.0.0 || ^19.0.0",
++    "react-dom": "^18.0.0 || ^19.0.0"
    }
-+,
-+  "peerDependencies": {
-+    "react": "^18.0.0 || ^19.0.0"
-+  }
  }

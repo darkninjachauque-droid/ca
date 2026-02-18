@@ -1,12 +1,12 @@
-patch-package
+diff --git a/node_modules/react-hook-form/package.json b/node_modules/react-hook-form/package.json
+index 5c59695..2c37554 100644
 --- a/node_modules/react-hook-form/package.json
 +++ b/node_modules/react-hook-form/package.json
-@@ -58,7 +58,7 @@
- "types": "./dist/index.d.ts",
- "peerDependencies": {
-   "@hookform/core": "^7.43.9",
--  "react": "^16.8.0 || ^17 || ^18"
-+  "react": "^16.8.0 || ^17 || ^18 || ^19"
- },
- "peerDependenciesMeta": {
-   "@hookform/core": {
+@@ -107,6 +107,6 @@
+     "typescript": "^5.3.3"
+   },
+   "peerDependencies": {
+-    "react": "^16.8.0 || ^17 || ^18"
++    "react": "^16.8.0 || ^17 || ^18 || ^19"
+   }
+ }

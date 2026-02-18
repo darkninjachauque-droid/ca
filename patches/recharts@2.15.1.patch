@@ -1,0 +1,15 @@
+diff --git a/node_modules/recharts/package.json b/node_modules/recharts/package.json
+index a782333..4cc6274 100644
+--- a/node_modules/recharts/package.json
++++ b/node_modules/recharts/package.json
+@@ -107,6 +107,6 @@
+     "react-is": "^16.13.1",
+     "tiny-invariant": "^1.2.0"
+   },
+   "peerDependencies": {
+-    "react": "^16.3.0 || ^17.0.0 || ^18.0.0",
+-    "react-dom": "^16.3.0 || ^17.0.0 || ^18.0.0"
++    "react": "^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
++    "react-dom": "^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+   }
+ }

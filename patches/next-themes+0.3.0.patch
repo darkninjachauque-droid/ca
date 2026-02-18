@@ -1,13 +1,12 @@
-patch-package
+diff --git a/node_modules/next-themes/package.json b/node_modules/next-themes/package.json
+index 5420132..859ff70 100644
 --- a/node_modules/next-themes/package.json
 +++ b/node_modules/next-themes/package.json
-@@ -44,7 +44,7 @@
-   "access": "public"
- },
- "peerDependencies": {
--  "react": "^16.8 || ^17 || ^18",
--  "react-dom": "^16.8 || ^17 || ^18"
-+  "react": "^16.8 || ^17 || ^18 || ^19",
-+  "react-dom": "^16.8 || ^17 || ^18 || ^19"
+@@ -34,6 +34,6 @@
+     "react-dom": ">=16.8.0"
+   },
+   "peerDependencies": {
+-    "react": "^16.8 || ^17 || ^18"
++    "react": "^16.8 || ^17 || ^18 || ^19"
+   }
  }
-}

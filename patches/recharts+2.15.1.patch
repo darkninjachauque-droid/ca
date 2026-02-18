@@ -1,11 +1,22 @@
-patch-package
+diff --git a/node_modules/recharts/package.json b/node_modules/recharts/package.json
+index 07b469a..e775193 100644
 --- a/node_modules/recharts/package.json
 +++ b/node_modules/recharts/package.json
-@@ -140,6 +140,6 @@
-   "tiny-invariant": "^1.2.0"
- },
- "peerDependencies": {
--  "react": "^16.0.0 || ^17.0.0 || ^18.0.0"
-+  "react": "^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+@@ -111,7 +111,7 @@
+   },
+   "peerDependencies": {
+     "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
+-    "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
++    "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+   },
+   "resolutions": {
+     "react-is": "16.8.0",
+@@ -124,4 +124,7 @@
+     "build": "cross-env NODE_ENV=production webpack -p --config webpack.config.prod.js",
+     "start": "webpack-dev-server"
+   }
++,
++  "peerDependencies": {
++    "react": "^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
++  }
  }
-}

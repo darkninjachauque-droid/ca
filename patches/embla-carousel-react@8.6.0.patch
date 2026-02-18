@@ -1,0 +1,12 @@
+diff --git a/node_modules/embla-carousel-react/package.json b/node_modules/embla-carousel-react/package.json
+index 611f727..89f643e 100644
+--- a/node_modules/embla-carousel-react/package.json
++++ b/node_modules/embla-carousel-react/package.json
+@@ -43,6 +43,6 @@
+     "typescript": "5.5.4"
+   },
+   "peerDependencies": {
+-    "react": ">=16.8.0"
++    "react": ">=16.8.0 || ^19.0.0"
+   }
+ }

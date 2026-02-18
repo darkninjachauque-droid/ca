@@ -1,13 +1,22 @@
+diff --git a/node_modules/@radix-ui/react-tooltip/package.json b/node_modules/@radix-ui/react-tooltip/package.json
+index 5817812..95828ac 100644
 --- a/node_modules/@radix-ui/react-tooltip/package.json
 +++ b/node_modules/@radix-ui/react-tooltip/package.json
-@@ -21,8 +21,8 @@
-   "license": "MIT",
-   "files": ["dist", "README.md"],
+@@ -47,7 +47,7 @@
    "peerDependencies": {
--    "react": "^18.0.0",
+     "@radix-ui/react-context": "1.1.2",
+     "react": "^18.0.0",
 -    "react-dom": "^18.0.0"
-+    "react": "^18.0.0 || ^19.0.0",
 +    "react-dom": "^18.0.0 || ^19.0.0"
    },
    "dependencies": {
-     "@radix-ui/react-compose-refs": "1.0.1",
+     "@babel/runtime": "^7.13.10",
+@@ -64,4 +64,7 @@
+   "bugs": {
+     "url": "https://github.com/radix-ui/primitives/issues"
+   }
++,
++  "peerDependencies": {
++    "react": "^18.0.0 || ^19.0.0"
++  }
+ }

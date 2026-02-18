@@ -1,22 +1,13 @@
 diff --git a/node_modules/@radix-ui/react-dropdown-menu/package.json b/node_modules/@radix-ui/react-dropdown-menu/package.json
-index c4e141a..2a392b4 100644
+index 515865a..9a98a49 100644
 --- a/node_modules/@radix-ui/react-dropdown-menu/package.json
 +++ b/node_modules/@radix-ui/react-dropdown-menu/package.json
-@@ -47,7 +47,7 @@
-   "peerDependencies": {
-     "@radix-ui/react-context": "1.1.2",
-     "react": "^18.0.0",
--    "react-dom": "^18.0.0"
-+    "react-dom": "^18.0.0 || ^19.0.0"
+@@ -62,7 +62,7 @@
    },
-   "dependencies": {
-     "@babel/runtime": "^7.13.10",
-@@ -65,4 +65,7 @@
-   "bugs": {
-     "url": "https://github.com/radix-ui/primitives/issues"
+   "peerDependencies": {
+-    "react": "^18.0.0",
+-    "react-dom": "^18.0.0"
++    "react": "^18.0.0 || ^19.0.0",
++    "react-dom": "^18.0.0 || ^19.0.0"
    }
-+,
-+  "peerDependencies": {
-+    "react": "^18.0.0 || ^19.0.0"
-+  }
  }
