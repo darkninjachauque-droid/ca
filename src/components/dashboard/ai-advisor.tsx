@@ -1,10 +1,10 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
+import { useFormStatus, useFormState } from "react-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useEffect, useState, useActionState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Bot, Lightbulb, Loader2, DollarSign, Sparkles, AlertCircle } from "lucide-react";
 
@@ -74,7 +74,7 @@ export function AIAdvisor() {
   });
   
   const initialState: AIFormState = { data: null, error: null, message: "" };
-  const [state, formAction] = useActionState(getAiSuggestions, initialState);
+  const [state, formAction] = useFormState(getAiSuggestions, initialState);
 
   useEffect(() => {
     if (state.error) {
