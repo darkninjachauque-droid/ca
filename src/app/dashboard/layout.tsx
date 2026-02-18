@@ -62,7 +62,10 @@ export default function DashboardLayout({
               <h1 className="text-lg font-semibold sm:text-xl">Dashboard</h1>
             </div>
           </header>
-          <main className="flex-1 overflow-auto p-4 sm:p-6">{children}</main>
+          <div className="flex-1 overflow-auto p-4 sm:p-6">{children}</div>
+          <footer className="border-t bg-card p-4 text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} HelioTech Devs &lt;/&gt;
+          </footer>
         </SidebarInset>
       </div>
     </SidebarProvider>
