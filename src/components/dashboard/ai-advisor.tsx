@@ -30,6 +30,7 @@ import {
 import { getAiSuggestions, type AIFormState } from "@/app/actions/ai";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import type { AIProfitAdvisorSuggestionsOutput } from "@/ai/flows/ai-profit-advisor-suggestions";
 
 const formSchema = z.object({
   costPerGb: z.coerce.number().positive("Custo por GB deve ser positivo."),
@@ -61,10 +62,12 @@ function SubmitButton() {
 export function AIAdvisor() {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
+  const [result, setResult] = useState<AIProfitAdvisorSuggestionsOutput | null>(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      costPerGb: undefined,
+      costPerGb: "",
       desiredProfitMarginPercentage: 20,
       currencySymbol: "MT",
     },
@@ -80,14 +83,13 @@ export function AIAdvisor() {
         title: "Erro da IA",
         description: state.error,
       });
+      setResult(null);
     }
-  }, [state.error, toast]);
-  
-  useEffect(() => {
-    if(state.data) {
+    if (state.data) {
+        setResult(state.data);
         form.reset();
     }
-  }, [state.data, form.reset]);
+  }, [state, toast, form]);
 
 
   return (
@@ -110,7 +112,7 @@ export function AIAdvisor() {
           </SheetDescription>
         </SheetHeader>
         <div className="py-6">
-        {state.data ? (
+        {result ? (
             <div className="space-y-4">
               <Card className="bg-primary/5 border-primary/20">
                 <CardHeader>
@@ -121,10 +123,10 @@ export function AIAdvisor() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-bold">
-                    {state.data.suggestedSellingPricePerGb.toFixed(2)}{" "}
-                    <span className="text-sm font-normal text-muted-foreground">{state.data.explanation.match(/([A-Z]{2,3}|[$€£])/)?.[0] || 'MT'}/GB</span>
+                    {result.suggestedSellingPricePerGb.toFixed(2)}{" "}
+                    <span className="text-sm font-normal text-muted-foreground">{result.explanation.match(/([A-Z]{2,3}|[$€£])/)?.[0] || 'MT'}/GB</span>
                   </p>
-                  <p className="mt-2 text-sm text-muted-foreground">{state.data.explanation}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{result.explanation}</p>
                 </CardContent>
               </Card>
 
@@ -137,13 +139,13 @@ export function AIAdvisor() {
                 </CardHeader>
                 <CardContent>
                   <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
-                    {state.data.optimalStrategyTips.map((tip, index) => (
+                    {result.optimalStrategyTips.map((tip, index) => (
                       <li key={index}>{tip}</li>
                     ))}
                   </ul>
                 </CardContent>
               </Card>
-              <Button onClick={() => state.data = null} variant="outline" className="w-full">Fazer outra consulta</Button>
+              <Button onClick={() => setResult(null)} variant="outline" className="w-full">Fazer outra consulta</Button>
             </div>
           ) : (
             <Form {...form}>

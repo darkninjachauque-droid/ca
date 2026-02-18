@@ -47,9 +47,9 @@ export function ProfitCalculator({ onCalculate }: ProfitCalculatorProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      totalGb: undefined,
-      totalCost: undefined,
-      pricePerGb: undefined,
+      totalGb: "",
+      totalCost: "",
+      pricePerGb: "",
     },
   });
 
@@ -70,8 +70,8 @@ export function ProfitCalculator({ onCalculate }: ProfitCalculatorProps) {
   const { totalGb, totalCost, pricePerGb } = form.watch();
   const isFormValid = form.formState.isValid;
 
-  const calculatedRevenue = isFormValid ? totalGb * pricePerGb : 0;
-  const calculatedProfit = isFormValid ? calculatedRevenue - totalCost : 0;
+  const calculatedRevenue = isFormValid ? Number(totalGb) * Number(pricePerGb) : 0;
+  const calculatedProfit = isFormValid ? calculatedRevenue - Number(totalCost) : 0;
 
   return (
     <Card>
