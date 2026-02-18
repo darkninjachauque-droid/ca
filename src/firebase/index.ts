@@ -9,12 +9,22 @@ import { firebaseConfig } from './config';
 // and easy to test.
 
 export function initializeFirebase() {
-  // This check prevents the app from crashing if the config is not set.
-  if (firebaseConfig.apiKey === "API_KEY" || firebaseConfig.projectId === "PROJECT_ID") {
-    console.error("Firebase config is not set. Using mock services. Please update src/firebase/config.ts");
+  // This check prevents the app from crashing if the config is not set or invalid.
+  const isInvalidConfig =
+    !firebaseConfig ||
+    !firebaseConfig.apiKey ||
+    firebaseConfig.apiKey === 'API_KEY' ||
+    !firebaseConfig.projectId ||
+    firebaseConfig.projectId === 'PROJECT_ID' ||
+    !firebaseConfig.authDomain;
+
+  if (isInvalidConfig) {
+    console.error(
+      'Firebase config is not set or invalid. Authentication will not work. Please update src/firebase/config.ts'
+    );
     return { app: null, auth: null, firestore: null };
   }
-  
+
   const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
   const firestore = getFirestore(app);
   const auth = getAuth(app);
