@@ -33,7 +33,7 @@ export default function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen">
+      <div className="flex min-h-screen w-full overflow-x-hidden">
         <Sidebar>
           <SidebarHeader>
             <Logo />
@@ -110,11 +110,11 @@ export default function DashboardLayout({
             </div>
           </SidebarFooter>
         </Sidebar>
-        <SidebarInset>
-          <header className="flex h-14 items-center gap-4 border-b bg-card px-4 sm:h-16 sm:px-6">
+        <SidebarInset className="flex flex-col w-full min-w-0">
+          <header className="flex h-14 items-center gap-2 border-b bg-card px-4 sm:h-16 sm:px-6">
             <SidebarTrigger />
-            <div className="flex-1">
-              <h1 className="text-lg font-semibold sm:text-xl">
+            <div className="flex-1 overflow-hidden">
+              <h1 className="text-lg font-semibold truncate">
                 {pathname === "/dashboard" && "Dashboard"}
                 {pathname === "/dashboard/about" && "Sobre Nós"}
                 {pathname === "/dashboard/terms" && "Termos de Uso"}
@@ -123,7 +123,11 @@ export default function DashboardLayout({
             </div>
             <ThemeToggle />
           </header>
-          <main className="flex-1 overflow-auto p-4 sm:p-6">{children}</main>
+          <main className="flex-1 w-full overflow-x-hidden p-4 sm:p-6">
+            <div className="mx-auto max-w-full lg:max-w-5xl">
+              {children}
+            </div>
+          </main>
           <footer className="border-t bg-card p-4 text-center text-sm text-muted-foreground">
             © {new Date().getFullYear()} HelioTech Devs &lt;/&gt;
           </footer>
