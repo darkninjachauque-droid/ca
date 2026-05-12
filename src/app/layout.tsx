@@ -76,6 +76,9 @@ export default function RootLayout({
           src="https://www.highperformanceformat.com/b1e80ea3e8b7859846c036a211114519/invoke.js" 
           async
         ></script>
+
+        {/* Novo Script de Anúncio Adicionado */}
+        <script src="https://pl29427249.profitablecpmratenetwork.com/31/28/10/312810970c6c509a959c0d4adf3d3786.js" async></script>
       </body>
     </html>
   );
