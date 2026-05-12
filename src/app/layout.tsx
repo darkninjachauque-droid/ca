@@ -35,6 +35,10 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Toaster />
+        <script
+          src="https://pl29426338.profitablecpmratenetwork.com/66/9f/39/669f397efe1137e72301009a24c87666.js"
+          async
+        ></script>
       </body>
     </html>
   );
