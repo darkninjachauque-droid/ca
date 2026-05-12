@@ -26,10 +26,17 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        {/* Google AdSense */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4540418582142311"
           crossOrigin="anonymous"
+        ></script>
+        {/* Ad Network Script 1 */}
+        <script 
+          async 
+          data-cfasync="false" 
+          src="https://pl29426261.profitablecpmratenetwork.com/eebc7bfa39a10201222044b33b6e34b8/invoke.js"
         ></script>
       </head>
       <body className="font-body antialiased overflow-x-hidden">
@@ -42,6 +49,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Toaster />
+        {/* Ad Network Script 2 (Bar) */}
         <script
           src="https://pl29426338.profitablecpmratenetwork.com/66/9f/39/669f397efe1137e72301009a24c87666.js"
           async

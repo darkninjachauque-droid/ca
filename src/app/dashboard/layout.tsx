@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FileText, ShieldCheck, Info, User } from "lucide-react";
+import { LayoutDashboard, FileText, ShieldCheck, Info } from "lucide-react";
 import React from "react";
 
 import {
@@ -124,8 +124,13 @@ export default function DashboardLayout({
             <ThemeToggle />
           </header>
           <main className="flex-1 w-full overflow-x-hidden p-4 sm:p-6">
-            <div className="mx-auto max-w-full lg:max-w-5xl">
+            <div className="mx-auto max-w-full lg:max-w-5xl space-y-6">
               {children}
+              
+              {/* Container para o anúncio de Banner */}
+              <div className="flex justify-center py-4">
+                <div id="container-eebc7bfa39a10201222044b33b6e34b8"></div>
+              </div>
             </div>
           </main>
           <footer className="border-t bg-card p-4 text-center text-sm text-muted-foreground">
